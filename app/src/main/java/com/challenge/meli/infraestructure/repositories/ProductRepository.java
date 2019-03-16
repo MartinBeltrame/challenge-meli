@@ -1,4 +1,4 @@
-package com.challenge.meli.infraestructure;
+package com.challenge.meli.infraestructure.repositories;
 
 import android.arch.lifecycle.LiveData;
 

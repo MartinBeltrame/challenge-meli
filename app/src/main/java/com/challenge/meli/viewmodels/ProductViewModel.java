@@ -6,7 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.challenge.meli.domain.models.Product;
-import com.challenge.meli.infraestructure.ProductRepository;
+import com.challenge.meli.infraestructure.repositories.ProductRepository;
 
 import java.util.List;
 
