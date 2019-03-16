@@ -41,7 +41,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         Product product;
 
@@ -49,7 +49,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
         TextView description;
         TextView price;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image_product);
             description = itemView.findViewById(R.id.description_product);
