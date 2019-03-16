@@ -1,4 +1,4 @@
-package com.challenge.meli.domain;
+package com.challenge.meli.domain.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.challenge.meli.R;
-import com.challenge.meli.models.Product;
+import com.challenge.meli.domain.models.Product;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.challenge.meli.models;
+package com.challenge.meli.domain.models;
 
 public class Product {
 

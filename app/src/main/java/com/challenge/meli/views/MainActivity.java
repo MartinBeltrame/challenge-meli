@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.challenge.meli.R;
-import com.challenge.meli.domain.AdapterProducts;
+import com.challenge.meli.domain.adapters.AdapterProducts;
 import com.challenge.meli.viewmodels.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity {
