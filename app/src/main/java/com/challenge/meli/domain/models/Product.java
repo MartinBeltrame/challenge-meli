@@ -4,7 +4,7 @@ public class Product {
 
     private String title;
     private double price;
-    private String urlImage;
+    private String thumbnail;
 
     public String getTitle() {
         return title;
@@ -14,7 +14,7 @@ public class Product {
         return price;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    public String getThumbnail() {
+        return thumbnail;
     }
 }

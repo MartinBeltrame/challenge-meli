@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.models.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
             this.product = product;
             title.setText(this.product.getTitle());
             price.setText(String.valueOf("$ " + this.product.getPrice()));
+            Picasso.get().load(this.product.getThumbnail()).into(image);
         }
     }
 }
