@@ -2,15 +2,15 @@ package com.challenge.meli.domain.models;
 
 public class Product {
 
-    private String description;
-    private int price;
+    private String title;
+    private double price;
     private String urlImage;
 
-    public String getDescription() {
-        return description;
+    public String getTitle() {
+        return title;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
