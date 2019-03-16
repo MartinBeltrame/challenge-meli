@@ -6,14 +6,13 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.challenge.meli.domain.models.Product;
-import com.challenge.meli.domain.repositories.RepositoryMeLi;
 import com.challenge.meli.infraestructure.ProductRepository;
 
 import java.util.List;
 
 public class ProductViewModel extends AndroidViewModel {
 
-    private RepositoryMeLi repositoryProduct = new ProductRepository();
+    private ProductRepository repositoryProduct = new ProductRepository();
 
     public ProductViewModel(@NonNull Application application) {
         super(application);
