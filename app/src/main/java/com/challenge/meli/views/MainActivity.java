@@ -12,7 +12,7 @@ import com.challenge.meli.viewmodels.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String ID_PRODUCT = "";
+    private static final String NAME = "";
 
     private AdapterProducts adapterProducts = new AdapterProducts();
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
-        productViewModel.getAll(ID_PRODUCT).observe(this, products -> adapterProducts.setProducts(products));
+        productViewModel.getAll(NAME).observe(this, products -> adapterProducts.setProducts(products));
 
         initializeRecycler();
     }

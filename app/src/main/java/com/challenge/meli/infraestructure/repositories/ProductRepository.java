@@ -13,10 +13,10 @@ public class ProductRepository {
 
     private ApiMeLi apiMeLi = new ApiMeLi();
 
-    public LiveData<List<Product>> getAll(String idProduct) {
+    public LiveData<List<Product>> getAll(String name) {
 
         MutableLiveData<List<Product>> products = new MutableLiveData<>();
-        apiMeLi.getAll(idProduct, new MeliCallback<List<Product>>() {
+        apiMeLi.getAll(name, new MeliCallback<List<Product>>() {
             @Override
             public void success(List<Product> response) {
                 products.setValue(response);

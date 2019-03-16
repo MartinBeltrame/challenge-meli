@@ -6,9 +6,10 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface Endpoints {
 
-    @GET("")
-    Call<List<Product>> getAll(String idProduct);
+    @GET("/items/{name}")
+    Call<List<Product>> getAll(@Path("name") String name);
 }

@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiMeLi {
 
-    private static final String API_URL = "";
+    private static final String API_URL = "https://api.mercadolibre.com/";
     private static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
     private Endpoints endpoints;
 
@@ -30,8 +30,8 @@ public class ApiMeLi {
         endpoints = retrofitBuilder.build().create(Endpoints.class);
     }
 
-    public void getAll(String idProduct, MeliCallback<List<Product>> callback) {
-        endpoints.getAll(idProduct).enqueue(callback);
+    public void getAll(String name, MeliCallback<List<Product>> callback) {
+        endpoints.getAll(name).enqueue(callback);
     }
 
 }

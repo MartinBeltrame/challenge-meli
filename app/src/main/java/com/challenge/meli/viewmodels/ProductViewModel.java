@@ -18,7 +18,7 @@ public class ProductViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public LiveData<List<Product>> getAll(String idProduct) {
-        return productRepository.getAll(idProduct);
+    public LiveData<List<Product>> getAll(String name) {
+        return productRepository.getAll(name);
     }
 }
