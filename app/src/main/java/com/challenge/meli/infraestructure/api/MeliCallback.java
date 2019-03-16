@@ -9,7 +9,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-abstract class MeliCallback<T> implements Callback<T> {
+public abstract class MeliCallback<T> implements Callback<T> {
 
     private static final String LOG_TAG = MeliCallback.class.getSimpleName();
 
@@ -37,7 +37,7 @@ abstract class MeliCallback<T> implements Callback<T> {
         error(throwable, 0);
     }
 
-    abstract void success(T respuesta);
+    public abstract void success(T response);
 
-    abstract void error(Throwable throwable, int code);
+    public abstract void error(Throwable throwable, int code);
 }
