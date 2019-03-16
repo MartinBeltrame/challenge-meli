@@ -59,7 +59,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
         void bind(Product product) {
             this.product = product;
             title.setText(this.product.getTitle());
-            price.setText(String.valueOf(this.product.getPrice()));
+            price.setText(String.valueOf("$ " + this.product.getPrice()));
         }
     }
 }
