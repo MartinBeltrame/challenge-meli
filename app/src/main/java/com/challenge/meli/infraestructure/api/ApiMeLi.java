@@ -12,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiMeLi {
 
     private static final String API_URL = "https://api.mercadolibre.com/";
-    private static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
     private Endpoints endpoints;
 
     public ApiMeLi() {
@@ -20,7 +19,6 @@ public class ApiMeLi {
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder
                 .setLenient()
-                .setDateFormat(DATE_FORMAT)
                 .create();
 
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
@@ -33,5 +31,4 @@ public class ApiMeLi {
     public void getAll(String name, MeliCallback<List<Product>> callback) {
         endpoints.getAll(name).enqueue(callback);
     }
-
 }

@@ -10,6 +10,6 @@ import retrofit2.http.Path;
 
 public interface Endpoints {
 
-    @GET("/items/{name}")
+    @GET("items/{name}")
     Call<List<Product>> getAll(@Path("name") String name);
 }
