@@ -1,10 +1,8 @@
 package com.challenge.meli.infraestructure.api;
 
-import com.challenge.meli.domain.models.Product;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.challenge.meli.domain.models.ResultResponse;
 
-import java.util.List;
+import org.json.JSONObject;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -15,20 +13,14 @@ public class ApiMeLi {
     private Endpoints endpoints;
 
     public ApiMeLi() {
-
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder
-                .setLenient()
-                .create();
-
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(API_URL);
 
         endpoints = retrofitBuilder.build().create(Endpoints.class);
     }
 
-    public void getAll(String name, MeliCallback<List<Product>> callback) {
+    public void getAll(String name, MeliCallback<ResultResponse> callback) {
         endpoints.getAll(name).enqueue(callback);
     }
 }
