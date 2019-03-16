@@ -12,7 +12,7 @@ import com.challenge.meli.viewmodels.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String NAME = "";
+    private static final String NAME = "reloj";
 
     private AdapterProducts adapterProducts = new AdapterProducts();
 

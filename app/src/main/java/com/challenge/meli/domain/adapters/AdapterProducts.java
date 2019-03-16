@@ -46,20 +46,20 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
         Product product;
 
         ImageView image;
-        TextView description;
+        TextView title;
         TextView price;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image_product);
-            description = itemView.findViewById(R.id.description_product);
+            title = itemView.findViewById(R.id.title_product);
             price = itemView.findViewById(R.id.price_product);
         }
 
         void bind(Product product) {
             this.product = product;
-            description.setText(this.product.getDescription());
-            price.setText(this.product.getPrice());
+            title.setText(this.product.getTitle());
+            price.setText(String.valueOf(this.product.getPrice()));
         }
     }
 }
