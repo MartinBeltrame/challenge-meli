@@ -2,4 +2,5 @@
     <string name="app_name">MeLi Challenge</string>
     <string name="search_ml">Buscar en Mercado Libre</string>
     <string name="search">BUSCAR</string>
+    <string name="message_invalid_name">El nombre del producto no es válido</string>
 </resources>

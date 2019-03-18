@@ -1,48 +1,53 @@
 package com.challenge.meli.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.services.SearchServices;
 import com.challenge.meli.utils.Constants;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchActivity extends AppCompatActivity implements EditText.OnEditorActionListener {
+
+    private SearchServices searchServices;
 
     private TextInputLayout layoutSearch;
     private AppCompatEditText editSearch;
-    private SearchServices searchServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        searchServices = new SearchServices();
         initializeComponents();
     }
 
     private void initializeComponents() {
+        searchServices = new SearchServices();
         layoutSearch = findViewById(R.id.layout_search);
         editSearch = findViewById(R.id.edit_search);
-        Button btnSearch = findViewById(R.id.btn_search);
-        btnSearch.setOnClickListener(this);
+        editSearch.setOnEditorActionListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
+    public void searchProduct() {
         String nameProduct = editSearch.getText().toString();
         boolean valid = searchServices.isValid(nameProduct);
 
         if (valid) {
             goToMainActivity(nameProduct);
         } else {
-            layoutSearch.setError("El nombre del producto no es válido");
+            hideSoftKeyboard(editSearch);
+            layoutSearch.setError(getString(R.string.message_invalid_name));
         }
     }
 
@@ -51,5 +56,19 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         intent.putExtra(Constants.NAME_PRODUCT, nameProduct);
         startActivity(intent);
         finish();
+    }
+
+    protected void hideSoftKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            searchProduct();
+            return true;
+        }
+        return false;
     }
 }
