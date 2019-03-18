@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.services.SearchServices;
-import com.challenge.meli.utils.Constants;
+import com.challenge.meli.views.utils.Constants;
 
 public class SearchActivity extends AppCompatActivity implements EditText.OnEditorActionListener {
 

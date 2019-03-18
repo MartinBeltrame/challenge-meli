@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterPhotos;
 import com.challenge.meli.domain.models.Product;
-import com.challenge.meli.utils.Constants;
+import com.challenge.meli.views.utils.Constants;
 import com.challenge.meli.viewmodels.DetailViewModel;
 import com.squareup.picasso.Picasso;
 

@@ -1,4 +1,4 @@
-package com.challenge.meli.utils;
+package com.challenge.meli.views.utils;
 
 public class Constants {
 

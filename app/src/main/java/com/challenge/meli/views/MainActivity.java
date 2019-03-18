@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterProducts;
 import com.challenge.meli.domain.interfaces.ListenerProduct;
-import com.challenge.meli.utils.Constants;
+import com.challenge.meli.views.utils.Constants;
 import com.challenge.meli.viewmodels.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity implements ListenerProduct {
