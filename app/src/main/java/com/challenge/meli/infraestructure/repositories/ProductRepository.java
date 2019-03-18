@@ -3,6 +3,7 @@ package com.challenge.meli.infraestructure.repositories;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
+import com.challenge.meli.domain.models.Description;
 import com.challenge.meli.domain.models.Product;
 import com.challenge.meli.domain.models.ResultResponse;
 import com.challenge.meli.infraestructure.api.ApiMeLi;
@@ -51,10 +52,10 @@ public class ProductRepository {
     public LiveData<String> getDescriptionProduct(String idProduct) {
 
         MutableLiveData<String> description = new MutableLiveData<>();
-        apiMeLi.getDescriptionProduct(idProduct, new MeliCallback<String>() {
+        apiMeLi.getDescriptionProduct(idProduct, new MeliCallback<List<Description>>() {
             @Override
-            public void success(String response) {
-                description.setValue(response);
+            public void success(List<Description> response) {
+                description.setValue(response.get(0).getPlainText());
             }
 
             @Override

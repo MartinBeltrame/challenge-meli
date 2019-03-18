@@ -1,7 +1,10 @@
 package com.challenge.meli.infraestructure.api;
 
+import com.challenge.meli.domain.models.Description;
 import com.challenge.meli.domain.models.Product;
 import com.challenge.meli.domain.models.ResultResponse;
+
+import java.util.List;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -27,7 +30,7 @@ public class ApiMeLi {
         endpoints.getProduct(idProduct).enqueue(callback);
     }
 
-    public void getDescriptionProduct(String idProduct, MeliCallback<String> callback) {
+    public void getDescriptionProduct(String idProduct, MeliCallback<List<Description>> callback) {
         endpoints.getDescription(idProduct).enqueue(callback);
     }
 }

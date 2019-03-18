@@ -22,6 +22,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView title;
     private TextView soldQuantity;
     private TextView price;
+    private TextView description;
 
     private AdapterPhotos adapterPhotos;
 
@@ -36,6 +37,7 @@ public class DetailActivity extends AppCompatActivity {
 
         DetailViewModel detailViewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
         detailViewModel.getProduct(idProduct).observe(this, product -> setProduct(product));
+        detailViewModel.getDescriptionProduct(idProduct).observe(this, result -> description.setText(result));
 
         intializeComponents();
     }
@@ -45,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
         soldQuantity = findViewById(R.id.sold_quantity);
         price = findViewById(R.id.price);
+        description = findViewById(R.id.description);
 
         adapterPhotos = new AdapterPhotos();
         RecyclerView recyclerPhotos = findViewById(R.id.recycler_photos);
