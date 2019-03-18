@@ -30,4 +30,21 @@ public class ProductRepository {
         });
         return products;
     }
+
+    public LiveData<Product> getProduct(String idProduct) {
+
+        MutableLiveData<Product> product = new MutableLiveData<>();
+        apiMeLi.getProduct(idProduct, new MeliCallback<Product>() {
+            @Override
+            public void success(Product response) {
+                product.setValue(response);
+            }
+
+            @Override
+            public void error(Throwable throwable, int code) {
+                product.setValue(null);
+            }
+        });
+        return product;
+    }
 }

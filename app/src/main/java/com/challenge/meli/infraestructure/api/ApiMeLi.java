@@ -1,5 +1,6 @@
 package com.challenge.meli.infraestructure.api;
 
+import com.challenge.meli.domain.models.Product;
 import com.challenge.meli.domain.models.ResultResponse;
 
 import retrofit2.Retrofit;
@@ -20,5 +21,9 @@ public class ApiMeLi {
 
     public void getAll(String name, MeliCallback<ResultResponse> callback) {
         endpoints.getAll(name).enqueue(callback);
+    }
+
+    public void getProduct(String idProduct, MeliCallback<Product> callback) {
+        endpoints.getProduct(idProduct).enqueue(callback);
     }
 }

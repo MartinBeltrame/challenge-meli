@@ -6,14 +6,17 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.challenge.meli.domain.models.Product;
+import com.challenge.meli.infraestructure.repositories.ProductRepository;
 
 public class DetailViewModel extends AndroidViewModel {
+
+    private ProductRepository productRepository = new ProductRepository();
 
     public DetailViewModel(@NonNull Application application) {
         super(application);
     }
 
     public LiveData<Product> getProduct(String idProduct) {
-        return null;
+        return productRepository.getProduct(idProduct);
     }
 }
