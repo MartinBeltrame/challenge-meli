@@ -15,7 +15,7 @@ import com.challenge.meli.viewmodels.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AdapterProducts adapterProducts = new AdapterProducts();
+    private AdapterProducts adapterProducts;
 
     private RecyclerView recyclerProducts;
     private ProgressBar progressBar;
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        adapterProducts = new AdapterProducts();
         String nameProduct = getIntent().getExtras().getString(Constants.NAME_PRODUCT);
 
         ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
