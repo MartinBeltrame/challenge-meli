@@ -1,6 +1,7 @@
 package com.challenge.meli.views;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,10 +11,11 @@ import android.widget.ProgressBar;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterProducts;
+import com.challenge.meli.domain.interfaces.ListenerProduct;
 import com.challenge.meli.utils.Constants;
 import com.challenge.meli.viewmodels.ProductViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListenerProduct {
 
     private AdapterProducts adapterProducts;
 
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        adapterProducts = new AdapterProducts();
+        adapterProducts = new AdapterProducts(this);
         String nameProduct = getIntent().getExtras().getString(Constants.NAME_PRODUCT);
 
         ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
@@ -43,5 +45,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerProducts = findViewById(R.id.recycler_product);
         recyclerProducts.setLayoutManager(new LinearLayoutManager(this));
         recyclerProducts.setAdapter(adapterProducts);
+    }
+
+    @Override
+    public void selectProduct(String idProduct) {
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        startActivity(intent);
     }
 }

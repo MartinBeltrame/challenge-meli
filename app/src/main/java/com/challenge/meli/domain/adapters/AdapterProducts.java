@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.challenge.meli.R;
+import com.challenge.meli.domain.interfaces.ListenerProduct;
 import com.challenge.meli.domain.models.Product;
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +19,11 @@ import java.util.List;
 public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHolder> {
 
     private List<Product> products = new ArrayList<>();
+    private ListenerProduct listenerProduct;
+
+    public AdapterProducts(ListenerProduct listenerProduct) {
+        this.listenerProduct = listenerProduct;
+    }
 
     @NonNull
     @Override
@@ -41,7 +47,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         Product product;
 
@@ -54,6 +60,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
             image = itemView.findViewById(R.id.image_product);
             title = itemView.findViewById(R.id.title_product);
             price = itemView.findViewById(R.id.price_product);
+            itemView.setOnClickListener(this);
         }
 
         void bind(Product product) {
@@ -61,6 +68,11 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
             title.setText(this.product.getTitle());
             price.setText(String.valueOf("$ " + this.product.getPrice()));
             Picasso.get().load(this.product.getThumbnail()).into(image);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listenerProduct.selectProduct(product.getId());
         }
     }
 }
