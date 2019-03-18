@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct {
     @Override
     public void selectProduct(String idProduct) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra(Constants.ID_PRODUCT, idProduct);
         startActivity(intent);
     }
 }
