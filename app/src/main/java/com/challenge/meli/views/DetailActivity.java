@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterPhotos;
+import com.challenge.meli.domain.models.Product;
+import com.challenge.meli.utils.Constants;
 import com.challenge.meli.viewmodels.DetailViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -27,21 +29,13 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        getSupportActionBar().setTitle(R.string.product);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String idProduct = "MLA698504698";
+        String idProduct = getIntent().getExtras().getString(Constants.ID_PRODUCT);
 
         DetailViewModel detailViewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
-        detailViewModel.getProduct(idProduct).observe(this, product -> {
-            String quantity = product.getSoldQuantity() + " vendidos";
-            String textPrice = "$ " + product.getPrice();
-
-            title.setText(product.getTitle());
-            soldQuantity.setText(quantity);
-            price.setText(textPrice);
-            Picasso.get().load(product.getThumbnail()).into(thumbnail);
-            adapterPhotos.setPhotos(product.getPictures());
-        });
+        detailViewModel.getProduct(idProduct).observe(this, product -> setProduct(product));
 
         intializeComponents();
     }
@@ -56,6 +50,17 @@ public class DetailActivity extends AppCompatActivity {
         RecyclerView recyclerPhotos = findViewById(R.id.recycler_photos);
         recyclerPhotos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerPhotos.setAdapter(adapterPhotos);
+    }
+
+    private void setProduct(Product product) {
+        String quantity = product.getSoldQuantity() + " vendidos";
+        String textPrice = "$ " + product.getPrice();
+
+        title.setText(product.getTitle());
+        soldQuantity.setText(quantity);
+        price.setText(textPrice);
+        Picasso.get().load(product.getThumbnail()).into(thumbnail);
+        adapterPhotos.setPhotos(product.getPictures());
     }
 
     @Override
