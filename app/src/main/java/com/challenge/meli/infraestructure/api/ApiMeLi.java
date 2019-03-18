@@ -26,4 +26,8 @@ public class ApiMeLi {
     public void getProduct(String idProduct, MeliCallback<Product> callback) {
         endpoints.getProduct(idProduct).enqueue(callback);
     }
+
+    public void getDescriptionProduct(String idProduct, MeliCallback<String> callback) {
+        endpoints.getDescription(idProduct).enqueue(callback);
+    }
 }

@@ -19,4 +19,8 @@ public class DetailViewModel extends AndroidViewModel {
     public LiveData<Product> getProduct(String idProduct) {
         return productRepository.getProduct(idProduct);
     }
+
+    public LiveData<String> getDescriptionProduct(String idProduct) {
+        return productRepository.getDescriptionProduct(idProduct);
+    }
 }

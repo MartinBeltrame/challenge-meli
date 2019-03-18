@@ -15,4 +15,7 @@ public interface Endpoints {
 
     @GET("items/{idProduct}")
     Call<Product> getProduct(@Path("idProduct") String idProduct);
+
+    @GET("items/{idProduct}/descriptions")
+    Call<String> getDescription(String idProduct);
 }

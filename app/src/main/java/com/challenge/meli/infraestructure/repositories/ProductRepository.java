@@ -47,4 +47,21 @@ public class ProductRepository {
         });
         return product;
     }
+
+    public LiveData<String> getDescriptionProduct(String idProduct) {
+
+        MutableLiveData<String> description = new MutableLiveData<>();
+        apiMeLi.getDescriptionProduct(idProduct, new MeliCallback<String>() {
+            @Override
+            public void success(String response) {
+                description.setValue(response);
+            }
+
+            @Override
+            public void error(Throwable throwable, int code) {
+                description.setValue(null);
+            }
+        });
+        return description;
+    }
 }
