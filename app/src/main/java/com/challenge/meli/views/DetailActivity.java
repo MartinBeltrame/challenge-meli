@@ -1,10 +1,11 @@
 package com.challenge.meli.views;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String idProduct = "MLA698504698";
 
@@ -54,5 +56,15 @@ public class DetailActivity extends AppCompatActivity {
         RecyclerView recyclerPhotos = findViewById(R.id.recycler_photos);
         recyclerPhotos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerPhotos.setAdapter(adapterPhotos);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
