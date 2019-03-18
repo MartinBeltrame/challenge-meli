@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.challenge.meli.R;
+import com.challenge.meli.utils.Constants;
 
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnSearch;
     private AppCompatEditText editSearch;
 
     @Override
@@ -24,7 +24,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initializeComponents() {
         editSearch = findViewById(R.id.edit_search);
-        btnSearch = findViewById(R.id.btn_search);
+        Button btnSearch = findViewById(R.id.btn_search);
         btnSearch.setOnClickListener(this);
     }
 
@@ -33,6 +33,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         String nameProduct = editSearch.getText().toString();
 
         Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+        intent.putExtra(Constants.NAME_PRODUCT, nameProduct);
         startActivity(intent);
         finish();
     }
