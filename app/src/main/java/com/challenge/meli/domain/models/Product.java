@@ -3,6 +3,8 @@ package com.challenge.meli.domain.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Product {
 
     private String id;
@@ -12,6 +14,7 @@ public class Product {
     @SerializedName("sold_quantity")
     @Expose
     private int soldQuantity;
+    private List<Picture> pictures;
 
     public String getTitle() {
         return title;
@@ -31,5 +34,9 @@ public class Product {
 
     public int getSoldQuantity() {
         return soldQuantity;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
     }
 }

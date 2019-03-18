@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.challenge.meli.R;
+import com.challenge.meli.domain.models.Picture;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class AdapterPhotos extends RecyclerView.Adapter<AdapterPhotos.ViewHolder> {
 
-    private List<String> photos = new ArrayList<>();
+    private List<Picture> photos = new ArrayList<>();
 
     @NonNull
     @Override
@@ -35,24 +36,24 @@ public class AdapterPhotos extends RecyclerView.Adapter<AdapterPhotos.ViewHolder
         return photos.size();
     }
 
-    public void setPhotos(List<String> photos) {
+    public void setPhotos(List<Picture> photos) {
         this.photos = photos;
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        String urlPhoto;
+        Picture picture;
         ImageView image;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.photo);
         }
 
-        void bind(String urlPhoto) {
-            this.urlPhoto = urlPhoto;
-            Picasso.get().load(this.urlPhoto).into(image);
+        void bind(Picture picture) {
+            this.picture = picture;
+            Picasso.get().load(this.picture.getUrl()).into(image);
         }
     }
 }

@@ -20,7 +20,6 @@ public class DetailActivity extends AppCompatActivity {
     private TextView soldQuantity;
     private TextView price;
 
-    private RecyclerView recyclerPhotos;
     private AdapterPhotos adapterPhotos;
 
     @Override
@@ -39,6 +38,7 @@ public class DetailActivity extends AppCompatActivity {
             soldQuantity.setText(quantity);
             price.setText(textPrice);
             Picasso.get().load(product.getThumbnail()).into(thumbnail);
+            adapterPhotos.setPhotos(product.getPictures());
         });
 
         intializeComponents();
@@ -51,7 +51,7 @@ public class DetailActivity extends AppCompatActivity {
         price = findViewById(R.id.price);
 
         adapterPhotos = new AdapterPhotos();
-        recyclerPhotos = findViewById(R.id.recycler_photos);
+        RecyclerView recyclerPhotos = findViewById(R.id.recycler_photos);
         recyclerPhotos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerPhotos.setAdapter(adapterPhotos);
     }
