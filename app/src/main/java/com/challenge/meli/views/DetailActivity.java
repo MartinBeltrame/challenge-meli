@@ -1,5 +1,6 @@
 package com.challenge.meli.views;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterPhotos;
+import com.challenge.meli.viewmodels.DetailViewModel;
+import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -16,6 +19,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView title;
     private TextView soldQuantity;
     private TextView price;
+
     private RecyclerView recyclerPhotos;
     private AdapterPhotos adapterPhotos;
 
@@ -23,6 +27,19 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        String idProduct = "MLA698504698";
+
+        DetailViewModel detailViewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
+        detailViewModel.getProduct(idProduct).observe(this, product -> {
+            String quantity = product.getSoldQuantity() + " vendidos";
+            String textPrice = "$ " + product.getPrice();
+
+            title.setText(product.getTitle());
+            soldQuantity.setText(quantity);
+            price.setText(textPrice);
+            Picasso.get().load(product.getThumbnail()).into(thumbnail);
+        });
 
         intializeComponents();
     }
