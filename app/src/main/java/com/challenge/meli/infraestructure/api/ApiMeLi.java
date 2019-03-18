@@ -2,8 +2,6 @@ package com.challenge.meli.infraestructure.api;
 
 import com.challenge.meli.domain.models.ResultResponse;
 
-import org.json.JSONObject;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
