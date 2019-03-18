@@ -4,4 +4,5 @@
     <string name="search">BUSCAR</string>
     <string name="message_invalid_name">El nombre del producto no es válido</string>
     <string name="product">Producto</string>
+    <string name="decription">Descripción</string>
 </resources>
