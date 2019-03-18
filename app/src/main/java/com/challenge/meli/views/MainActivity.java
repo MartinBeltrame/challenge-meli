@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterProducts;
@@ -15,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
     private AdapterProducts adapterProducts = new AdapterProducts();
 
+    private RecyclerView recyclerProducts;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,13 +28,18 @@ public class MainActivity extends AppCompatActivity {
         String nameProduct = getIntent().getExtras().getString(Constants.NAME_PRODUCT);
 
         ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
-        productViewModel.getAll(nameProduct).observe(this, products -> adapterProducts.setProducts(products));
+        productViewModel.getAll(nameProduct).observe(this, products -> {
+            progressBar.setVisibility(View.GONE);
+            adapterProducts.setProducts(products);
+            recyclerProducts.setVisibility(View.VISIBLE);
+        });
 
-        initializeRecycler();
+        initializeComponents();
     }
 
-    private void initializeRecycler() {
-        RecyclerView recyclerProducts = findViewById(R.id.recycler_product);
+    private void initializeComponents() {
+        progressBar = findViewById(R.id.progressBar);
+        recyclerProducts = findViewById(R.id.recycler_product);
         recyclerProducts.setLayoutManager(new LinearLayoutManager(this));
         recyclerProducts.setAdapter(adapterProducts);
     }
