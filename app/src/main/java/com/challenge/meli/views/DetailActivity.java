@@ -2,11 +2,15 @@ package com.challenge.meli.views;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.challenge.meli.R;
@@ -23,6 +27,9 @@ public class DetailActivity extends AppCompatActivity {
     private TextView soldQuantity;
     private TextView price;
     private TextView description;
+    private ProgressBar progressBar;
+    private ConstraintLayout layoutHeader;
+    private NestedScrollView layoutBody;
 
     private AdapterPhotos adapterPhotos;
 
@@ -37,7 +44,10 @@ public class DetailActivity extends AppCompatActivity {
 
         DetailViewModel detailViewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
         detailViewModel.getProduct(idProduct).observe(this, product -> setProduct(product));
-        detailViewModel.getDescriptionProduct(idProduct).observe(this, result -> description.setText(result));
+        detailViewModel.getDescriptionProduct(idProduct).observe(this, result -> {
+            description.setText(result);
+            setVisibleLayout();
+        });
 
         intializeComponents();
     }
@@ -48,6 +58,9 @@ public class DetailActivity extends AppCompatActivity {
         soldQuantity = findViewById(R.id.sold_quantity);
         price = findViewById(R.id.price);
         description = findViewById(R.id.description);
+        progressBar = findViewById(R.id.progress_bar);
+        layoutHeader = findViewById(R.id.layout_header);
+        layoutBody = findViewById(R.id.layout_body);
 
         adapterPhotos = new AdapterPhotos();
         RecyclerView recyclerPhotos = findViewById(R.id.recycler_photos);
@@ -74,5 +87,11 @@ public class DetailActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setVisibleLayout() {
+        progressBar.setVisibility(View.GONE);
+        layoutHeader.setVisibility(View.VISIBLE);
+        layoutBody.setVisibility(View.VISIBLE);
     }
 }
