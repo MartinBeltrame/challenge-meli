@@ -10,6 +10,11 @@ public class SearchServicesTest {
     private SearchServices searchServices = new SearchServices();
 
     @Test
+    public void returnFalseNullValue() {
+        Assert.assertFalse(searchServices.isValid(null));
+    }
+
+    @Test
     public void returnFalseEmptyField() {
         Assert.assertFalse(searchServices.isValid(""));
     }
