@@ -16,8 +16,9 @@ import android.widget.TextView;
 import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterPhotos;
 import com.challenge.meli.domain.models.Product;
-import com.challenge.meli.views.utils.Constants;
+import com.challenge.meli.domain.services.DetailServices;
 import com.challenge.meli.viewmodels.DetailViewModel;
+import com.challenge.meli.views.utils.Constants;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class DetailActivity extends AppCompatActivity {
     private NestedScrollView layoutBody;
 
     private AdapterPhotos adapterPhotos;
+    private DetailServices detailServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +43,25 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         String idProduct = getIntent().getExtras().getString(Constants.ID_PRODUCT);
+        detailServices = new DetailServices(this);
 
+        intializeViewModels(idProduct);
+        intializeComponents();
+    }
+
+    private void intializeViewModels(String idProduct) {
         DetailViewModel detailViewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
-        detailViewModel.getProduct(idProduct).observe(this, product -> setProduct(product));
+        detailViewModel.getProduct(idProduct).observe(this, product -> {
+            if (product != null) {
+                setProduct(product);
+            } else {
+                detailServices.unexpectedError();
+            }
+        });
         detailViewModel.getDescriptionProduct(idProduct).observe(this, result -> {
             description.setText(result);
             setVisibleLayout();
         });
-
-        intializeComponents();
     }
 
     private void intializeComponents() {
