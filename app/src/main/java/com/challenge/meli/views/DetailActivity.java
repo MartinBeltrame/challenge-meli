@@ -17,9 +17,9 @@ import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterPhotos;
 import com.challenge.meli.domain.interfaces.ErrorCallback;
 import com.challenge.meli.domain.models.Product;
-import com.challenge.meli.domain.services.DetailServices;
 import com.challenge.meli.viewmodels.DetailViewModel;
 import com.challenge.meli.views.utils.Constants;
+import com.challenge.meli.views.utils.UtilServices;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity implements ErrorCallback {
@@ -34,7 +34,6 @@ public class DetailActivity extends AppCompatActivity implements ErrorCallback {
     private NestedScrollView layoutBody;
 
     private AdapterPhotos adapterPhotos;
-    private DetailServices detailServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +45,8 @@ public class DetailActivity extends AppCompatActivity implements ErrorCallback {
         ConstraintLayout layoutNoConnection = findViewById(R.id.layout_no_connection);
         progressBar = findViewById(R.id.progress_bar);
 
-        detailServices = new DetailServices(this);
 
-        if (detailServices.hasConnection()) {
+        if (UtilServices.hasConnection(this)) {
             String idProduct = getIntent().getExtras().getString(Constants.ID_PRODUCT);
             intializeViewModels(idProduct);
             intializeComponents();
@@ -111,6 +109,6 @@ public class DetailActivity extends AppCompatActivity implements ErrorCallback {
 
     @Override
     public void error(String idError) {
-        detailServices.unexpectedError();
+        UtilServices.unexpectedError(this);
     }
 }

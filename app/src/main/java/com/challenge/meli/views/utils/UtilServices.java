@@ -1,23 +1,17 @@
-package com.challenge.meli.domain.services;
+package com.challenge.meli.views.utils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AlertDialog;
 
-public class MainServices {
+public class UtilServices {
 
-    private Activity activity;
-
-    public MainServices(Activity activity) {
-        this.activity = activity;
-    }
-
-    public boolean hasConnection() {
+    public static boolean hasConnection(Activity activity) {
         return ((ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
-    public void unexpectedError() {
+    public static void unexpectedError(Activity activity) {
         new AlertDialog.Builder(activity)
                 .setTitle("Error")
                 .setMessage("Algo ha salido mal. Por favor intentelo nuevamente")

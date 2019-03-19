@@ -14,14 +14,13 @@ import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterProducts;
 import com.challenge.meli.domain.interfaces.ErrorCallback;
 import com.challenge.meli.domain.interfaces.ListenerProduct;
-import com.challenge.meli.domain.services.MainServices;
-import com.challenge.meli.views.utils.Constants;
 import com.challenge.meli.viewmodels.ProductViewModel;
+import com.challenge.meli.views.utils.Constants;
+import com.challenge.meli.views.utils.UtilServices;
 
 public class MainActivity extends AppCompatActivity implements ListenerProduct, ErrorCallback {
 
     private AdapterProducts adapterProducts;
-    private MainServices mainServices;
 
     private RecyclerView recyclerProducts;
     private ProgressBar progressBar;
@@ -31,13 +30,12 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainServices = new MainServices(this);
         adapterProducts = new AdapterProducts(this);
 
         progressBar = findViewById(R.id.progressBar);
         ConstraintLayout layoutNoConnection = findViewById(R.id.layout_no_connection);
 
-        if (mainServices.hasConnection()) {
+        if (UtilServices.hasConnection(this)) {
             String nameProduct = getIntent().getExtras().getString(Constants.NAME_PRODUCT);
             initializeViewModel(nameProduct);
             initializeComponents();
@@ -71,6 +69,6 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
 
     @Override
     public void error(String idError) {
-        mainServices.unexpectedError();
+        UtilServices.unexpectedError(this);
     }
 }
