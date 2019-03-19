@@ -7,7 +7,6 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -43,6 +42,7 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.product);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        ConstraintLayout layoutNoConnection = findViewById(R.id.layout_no_connection);
         progressBar = findViewById(R.id.progress_bar);
 
         String idProduct = getIntent().getExtras().getString(Constants.ID_PRODUCT);
@@ -53,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
             intializeComponents();
         } else {
             progressBar.setVisibility(View.GONE);
-            Log.e("Error", "No hay conexion a internet");
+            layoutNoConnection.setVisibility(View.VISIBLE);
         }
     }
 
