@@ -47,7 +47,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         Product product;
 
