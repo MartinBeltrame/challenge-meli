@@ -15,13 +15,14 @@ import android.widget.TextView;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterPhotos;
+import com.challenge.meli.domain.interfaces.ErrorCallback;
 import com.challenge.meli.domain.models.Product;
 import com.challenge.meli.domain.services.DetailServices;
 import com.challenge.meli.viewmodels.DetailViewModel;
 import com.challenge.meli.views.utils.Constants;
 import com.squareup.picasso.Picasso;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements ErrorCallback {
 
     private ImageView thumbnail;
     private TextView title;
@@ -59,14 +60,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private void intializeViewModels(String idProduct) {
         DetailViewModel detailViewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
-        detailViewModel.getProduct(idProduct).observe(this, product -> {
-            if (product != null) {
-                setProduct(product);
-            } else {
-                detailServices.unexpectedError();
-            }
-        });
-        detailViewModel.getDescriptionProduct(idProduct).observe(this, result -> {
+        detailViewModel.getProduct(idProduct, this).observe(this, product -> setProduct(product));
+        detailViewModel.getDescriptionProduct(idProduct, this).observe(this, result -> {
             description.setText(result);
             setVisibleLayout();
         });
@@ -112,5 +107,10 @@ public class DetailActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
         layoutHeader.setVisibility(View.VISIBLE);
         layoutBody.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void error(String idError) {
+        detailServices.unexpectedError();
     }
 }

@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
+import com.challenge.meli.domain.interfaces.ErrorCallback;
 import com.challenge.meli.domain.models.Product;
 import com.challenge.meli.infraestructure.repositories.ProductRepository;
 
@@ -18,7 +19,7 @@ public class ProductViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public LiveData<List<Product>> getAll(String name) {
-        return productRepository.getAll(name);
+    public LiveData<List<Product>> getAll(String name, ErrorCallback errorCallback) {
+        return productRepository.getAll(name, errorCallback);
     }
 }

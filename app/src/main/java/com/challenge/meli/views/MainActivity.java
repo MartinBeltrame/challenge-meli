@@ -12,14 +12,16 @@ import android.widget.ProgressBar;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.adapters.AdapterProducts;
+import com.challenge.meli.domain.interfaces.ErrorCallback;
 import com.challenge.meli.domain.interfaces.ListenerProduct;
 import com.challenge.meli.domain.services.MainServices;
 import com.challenge.meli.views.utils.Constants;
 import com.challenge.meli.viewmodels.ProductViewModel;
 
-public class MainActivity extends AppCompatActivity implements ListenerProduct {
+public class MainActivity extends AppCompatActivity implements ListenerProduct, ErrorCallback {
 
     private AdapterProducts adapterProducts;
+    private MainServices mainServices;
 
     private RecyclerView recyclerProducts;
     private ProgressBar progressBar;
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MainServices mainServices = new MainServices(this);
+        mainServices = new MainServices(this);
         adapterProducts = new AdapterProducts(this);
 
         progressBar = findViewById(R.id.progressBar);
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct {
 
     private void initializeViewModel(String nameProduct) {
         ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
-        productViewModel.getAll(nameProduct).observe(this, products -> {
+        productViewModel.getAll(nameProduct, this).observe(this, products -> {
             progressBar.setVisibility(View.GONE);
             adapterProducts.setProducts(products);
             recyclerProducts.setVisibility(View.VISIBLE);
@@ -65,5 +67,10 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra(Constants.ID_PRODUCT, idProduct);
         startActivity(intent);
+    }
+
+    @Override
+    public void error(String idError) {
+        mainServices.unexpectedError();
     }
 }
