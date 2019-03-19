@@ -5,4 +5,5 @@
     <string name="message_invalid_name">El nombre del producto no es válido</string>
     <string name="product">Producto</string>
     <string name="decription">Descripción</string>
+    <string name="message_no_connection">No tienes conexión a internet.\nConéctalo y vuelve a intentarlo</string>
 </resources>
