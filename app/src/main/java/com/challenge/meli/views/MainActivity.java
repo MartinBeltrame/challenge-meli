@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
     private ProgressBar progressBar;
     private SearchServices searchServices;
     private ConstraintLayout layoutNoConnection;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +76,29 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
         recyclerProducts.setAdapter(adapterProducts);
     }
 
+    public void searchProduct(String nameProduct) {
+        boolean valid = searchServices.isValid(nameProduct);
+        if (valid) {
+            getAllProducts(nameProduct);
+        } else {
+            searchView.setQuery("", false);
+            Toast.makeText(this, getString(R.string.message_invalid_name), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void clearSearchView() {
+        searchView.onActionViewCollapsed();
+        searchView.setQuery("", false);
+        searchView.clearFocus();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         MenuItem searchViewItem = menu.findItem(R.id.app_bar_search);
 
-        SearchView searchView = (SearchView) searchViewItem.getActionView();
+        searchView = (SearchView) searchViewItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String nameProduct) {
@@ -98,20 +115,12 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
         return true;
     }
 
-    public void searchProduct(String nameProduct) {
-        boolean valid = searchServices.isValid(nameProduct);
-        if (valid) {
-            getAllProducts(nameProduct);
-        } else {
-            Toast.makeText(this, getString(R.string.message_invalid_name), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     @Override
     public void selectProduct(String idProduct) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra(Constants.ID_PRODUCT, idProduct);
         startActivity(intent);
+        clearSearchView();
     }
 
     @Override
