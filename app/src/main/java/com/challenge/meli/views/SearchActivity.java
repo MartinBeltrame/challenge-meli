@@ -1,21 +1,19 @@
 package com.challenge.meli.views;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.challenge.meli.R;
 import com.challenge.meli.domain.services.SearchServices;
 import com.challenge.meli.views.utils.Constants;
+import com.challenge.meli.views.utils.UtilServices;
 
 public class SearchActivity extends AppCompatActivity implements EditText.OnEditorActionListener {
 
@@ -46,7 +44,7 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
         if (valid) {
             goToMainActivity(nameProduct);
         } else {
-            hideSoftKeyboard(editSearch);
+            UtilServices.hideSoftKeyboard(this, editSearch);
             layoutSearch.setError(getString(R.string.message_invalid_name));
         }
     }
@@ -56,11 +54,6 @@ public class SearchActivity extends AppCompatActivity implements EditText.OnEdit
         intent.putExtra(Constants.NAME_PRODUCT, nameProduct);
         startActivity(intent);
         finish();
-    }
-
-    protected void hideSoftKeyboard(View view) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override

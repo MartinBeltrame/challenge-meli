@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 public class UtilServices {
 
@@ -17,5 +19,10 @@ public class UtilServices {
                 .setMessage("Algo ha salido mal. Por favor intentelo nuevamente")
                 .setPositiveButton("Continuar", (dialog, which) -> activity.finish())
                 .show();
+    }
+
+    public static void hideSoftKeyboard(Activity activity, View view) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
