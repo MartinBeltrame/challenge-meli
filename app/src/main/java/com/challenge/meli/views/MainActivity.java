@@ -27,10 +27,12 @@ import com.challenge.meli.views.utils.UtilServices;
 public class MainActivity extends AppCompatActivity implements ListenerProduct, ErrorCallback {
 
     private AdapterProducts adapterProducts;
+    private ProductViewModel productViewModel;
 
     private RecyclerView recyclerProducts;
     private ProgressBar progressBar;
     private SearchServices searchServices;
+    private ConstraintLayout layoutNoConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +43,24 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
         searchServices = new SearchServices();
 
         progressBar = findViewById(R.id.progressBar);
-        ConstraintLayout layoutNoConnection = findViewById(R.id.layout_no_connection);
+        layoutNoConnection = findViewById(R.id.layout_no_connection);
 
         if (UtilServices.hasConnection(this)) {
             String nameProduct = getIntent().getExtras().getString(Constants.NAME_PRODUCT);
-            initializeViewModel(nameProduct);
+
             initializeComponents();
+            getAllProducts(nameProduct);
         } else {
             progressBar.setVisibility(View.GONE);
             layoutNoConnection.setVisibility(View.VISIBLE);
         }
     }
 
-    private void initializeViewModel(String nameProduct) {
-        ProductViewModel productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
+    private void getAllProducts(String nameProduct) {
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerProducts.setVisibility(View.INVISIBLE);
+        layoutNoConnection.setVisibility(View.GONE);
+
         productViewModel.getAll(nameProduct, this).observe(this, products -> {
             progressBar.setVisibility(View.GONE);
             adapterProducts.setProducts(products);
@@ -63,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
     }
 
     private void initializeComponents() {
+        productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         recyclerProducts = findViewById(R.id.recycler_product);
         recyclerProducts.setLayoutManager(new LinearLayoutManager(this));
         recyclerProducts.setAdapter(adapterProducts);
@@ -78,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String nameProduct) {
-                searchProduct(searchView, nameProduct);
+                searchProduct(nameProduct);
+                UtilServices.hideSoftKeyboard(MainActivity.this, searchView);
                 return false;
             }
 
@@ -90,14 +98,13 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
         return true;
     }
 
-    public void searchProduct(SearchView searchView, String nameProduct) {
+    public void searchProduct(String nameProduct) {
         boolean valid = searchServices.isValid(nameProduct);
         if (valid) {
-            initializeViewModel(nameProduct);
+            getAllProducts(nameProduct);
         } else {
             Toast.makeText(this, getString(R.string.message_invalid_name), Toast.LENGTH_SHORT).show();
         }
-        UtilServices.hideSoftKeyboard(this, searchView);
     }
 
     @Override
