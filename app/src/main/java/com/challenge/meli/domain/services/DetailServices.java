@@ -17,7 +17,6 @@ public class DetailServices {
         return ((ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
-
     public void unexpectedError() {
         new AlertDialog.Builder(activity)
                 .setTitle("Error")

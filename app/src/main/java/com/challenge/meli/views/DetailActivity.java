@@ -45,10 +45,10 @@ public class DetailActivity extends AppCompatActivity {
         ConstraintLayout layoutNoConnection = findViewById(R.id.layout_no_connection);
         progressBar = findViewById(R.id.progress_bar);
 
-        String idProduct = getIntent().getExtras().getString(Constants.ID_PRODUCT);
         detailServices = new DetailServices(this);
 
         if (detailServices.hasConnection()) {
+            String idProduct = getIntent().getExtras().getString(Constants.ID_PRODUCT);
             intializeViewModels(idProduct);
             intializeComponents();
         } else {
