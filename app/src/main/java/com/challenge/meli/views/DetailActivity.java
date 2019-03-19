@@ -7,6 +7,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -42,11 +43,18 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.product);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        progressBar = findViewById(R.id.progress_bar);
+
         String idProduct = getIntent().getExtras().getString(Constants.ID_PRODUCT);
         detailServices = new DetailServices(this);
 
-        intializeViewModels(idProduct);
-        intializeComponents();
+        if (detailServices.hasConnection()) {
+            intializeViewModels(idProduct);
+            intializeComponents();
+        } else {
+            progressBar.setVisibility(View.GONE);
+            Log.e("Error", "No hay conexion a internet");
+        }
     }
 
     private void intializeViewModels(String idProduct) {
@@ -70,7 +78,6 @@ public class DetailActivity extends AppCompatActivity {
         soldQuantity = findViewById(R.id.sold_quantity);
         price = findViewById(R.id.price);
         description = findViewById(R.id.description);
-        progressBar = findViewById(R.id.progress_bar);
         layoutHeader = findViewById(R.id.layout_header);
         layoutBody = findViewById(R.id.layout_body);
 
