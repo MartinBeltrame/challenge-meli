@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        adapterProducts = new AdapterProducts(this);
         searchServices = new SearchServices();
 
         progressBar = findViewById(R.id.progressBar);
@@ -70,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements ListenerProduct, 
     }
 
     private void initializeComponents() {
+        adapterProducts = new AdapterProducts(this);
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         recyclerProducts = findViewById(R.id.recycler_product);
         recyclerProducts.setLayoutManager(new LinearLayoutManager(this));
