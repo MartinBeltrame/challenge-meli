@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.challenge.meli.R;
+import com.challenge.meli.domain.adapters.AdapterAttributes;
 import com.challenge.meli.domain.adapters.AdapterPhotos;
 import com.challenge.meli.domain.interfaces.ErrorCallback;
 import com.challenge.meli.domain.models.Product;
@@ -23,6 +25,8 @@ import com.challenge.meli.views.utils.UtilServices;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity implements ErrorCallback {
+
+    private static final int NUMBER_OF_COLUMNS = 2;
 
     private ImageView thumbnail;
     private TextView title;
@@ -34,6 +38,7 @@ public class DetailActivity extends AppCompatActivity implements ErrorCallback {
     private NestedScrollView layoutBody;
 
     private AdapterPhotos adapterPhotos;
+    private AdapterAttributes adapterAttributes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +83,11 @@ public class DetailActivity extends AppCompatActivity implements ErrorCallback {
         RecyclerView recyclerPhotos = findViewById(R.id.recycler_photos);
         recyclerPhotos.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerPhotos.setAdapter(adapterPhotos);
+
+        adapterAttributes = new AdapterAttributes();
+        RecyclerView recyclerAttributes = findViewById(R.id.recycler_attributes);
+        recyclerAttributes.setLayoutManager(new GridLayoutManager(this, NUMBER_OF_COLUMNS));
+        recyclerAttributes.setAdapter(adapterAttributes);
     }
 
     private void setProduct(Product product) {

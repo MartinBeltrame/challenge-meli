@@ -3,7 +3,7 @@ package com.challenge.meli.domain.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Attributes {
+public class Attribute {
 
     private String name;
     @SerializedName("value_name")

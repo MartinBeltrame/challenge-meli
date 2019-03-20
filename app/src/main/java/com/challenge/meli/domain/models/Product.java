@@ -16,7 +16,7 @@ public class Product {
     @Expose
     private int soldQuantity;
     private List<Picture> pictures;
-    private List<Attributes> attributes = new ArrayList<>();
+    private List<Attribute> attributes = new ArrayList<>();
 
     public String getTitle() {
         return title;
@@ -42,7 +42,7 @@ public class Product {
         return pictures;
     }
 
-    public List<Attributes> getAttributes() {
+    public List<Attribute> getAttributes() {
         return attributes;
     }
 }
