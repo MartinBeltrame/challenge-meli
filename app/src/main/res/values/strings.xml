@@ -6,4 +6,5 @@
     <string name="product">Producto</string>
     <string name="decription">Descripción</string>
     <string name="message_no_connection">No tienes conexión a internet.\nConéctalo y vuelve a intentarlo</string>
+    <string name="characteristics">Características</string>
 </resources>
