@@ -38,11 +38,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="64dp"
-        android:src="@mipmap/ic_launcher_round"
+        android:layout_marginBottom="48dp"
+        android:src="@mipmap/ic_meli"
         app:layout_constraintBottom_toTopOf="@+id/layout_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
