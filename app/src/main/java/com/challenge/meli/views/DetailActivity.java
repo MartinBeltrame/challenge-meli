@@ -99,6 +99,7 @@ public class DetailActivity extends AppCompatActivity implements ErrorCallback {
         price.setText(textPrice);
         Picasso.get().load(product.getThumbnail()).into(thumbnail);
         adapterPhotos.setPhotos(product.getPictures());
+        adapterAttributes.setAttributes(product.getAttributes());
     }
 
     @Override

@@ -54,8 +54,14 @@ public class AdapterAttributes extends RecyclerView.Adapter<AdapterAttributes.Vi
 
         void bind(Attribute attribute) {
             this.attribute = attribute;
-            name.setText(this.attribute.getName());
-            value.setText(this.attribute.getValueName());
+            String sName = this.attribute.getName() + ":";
+            String sValue = this.attribute.getValueName();
+
+            name.setText(sName);
+            if (sValue == null) {
+                sValue = "-";
+            }
+            value.setText(sValue);
         }
     }
 }
