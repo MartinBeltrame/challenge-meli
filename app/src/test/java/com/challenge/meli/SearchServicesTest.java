@@ -33,4 +33,9 @@ public class SearchServicesTest {
     public void returnFalseTextContainRegularExpresion() {
         Assert.assertFalse(searchServices.isValid("#JBL"));
     }
+
+    @Test
+    public void returnTrueTextContainWeirdCharacter() {
+        Assert.assertFalse(searchServices.isValid("Avión para niño"));
+    }
 }
