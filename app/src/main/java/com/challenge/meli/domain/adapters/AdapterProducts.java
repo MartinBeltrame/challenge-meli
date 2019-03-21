@@ -67,7 +67,7 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
             this.product = product;
             title.setText(this.product.getTitle());
             price.setText(String.valueOf("$ " + this.product.getPrice()));
-            Picasso.get().load(this.product.getThumbnail()).into(image);
+            Picasso.get().load(this.product.getThumbnail()).placeholder(R.drawable.ic_photo).into(image);
         }
 
         @Override

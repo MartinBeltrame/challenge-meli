@@ -52,7 +52,7 @@ public class AdapterPhotos extends RecyclerView.Adapter<AdapterPhotos.ViewHolder
 
         void bind(Picture picture) {
             this.picture = picture;
-            Picasso.get().load(this.picture.getUrl()).into(image);
+            Picasso.get().load(this.picture.getUrl()).placeholder(R.drawable.ic_photo).into(image);
         }
     }
 }
