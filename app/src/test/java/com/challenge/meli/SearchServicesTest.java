@@ -36,6 +36,6 @@ public class SearchServicesTest {
 
     @Test
     public void returnTrueTextContainWeirdCharacter() {
-        Assert.assertFalse(searchServices.isValid("Avión para niño"));
+        Assert.assertTrue(searchServices.isValid("Avión para niño"));
     }
 }
